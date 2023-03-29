@@ -16,7 +16,6 @@ readonly class AsyncGenerator
 
     public function generate(int $count, int $chunkSize, callable $handler): void
     {
-        /** @var Future[] $promises */
         $promises = [];
 
         for ($i = 0; $i < $count; $i += $chunkSize) {

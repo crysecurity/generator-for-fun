@@ -12,7 +12,7 @@ class AsyncGeneratorTest extends TestCase
 {
     private const LOG_FILENAME = 'lead-generator';
 
-    public static function dataProviderGenerate(): iterable
+    public static function dataProviderGenerate(): Generator
     {
         yield '10000 Leads' => [
             10000,
@@ -28,7 +28,7 @@ class AsyncGeneratorTest extends TestCase
         int $maxExecutionSeconds,
         int $chunkSize,
         GeneratorContract $generator
-    ) {
+    ): void {
         $start = microtime(true);
 
         (new AsyncGenerator($generator))
@@ -48,6 +48,13 @@ class AsyncGeneratorTest extends TestCase
 
         $time = microtime(true) - $start;
 
+        $lines = file(self::LOG_FILENAME . '.log');
+
+        if (false === $lines) {
+            throw new \Exception("File was wrong");
+        }
+
+        $this->assertSame($countLeads, count($lines));
         $this->assertTrue($maxExecutionSeconds - $time > 0);
     }
 
