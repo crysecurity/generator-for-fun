@@ -5,6 +5,11 @@
             "CrySecurity\\AsyncLeads\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "CrySecurity\\AsyncLeads\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Dubinskii Artem",

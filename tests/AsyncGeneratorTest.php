@@ -1,9 +1,14 @@
 <?php
 
+namespace CrySecurity\AsyncLeads\Tests;
+
 use CrySecurity\AsyncLeads\AsyncGenerator;
 use CrySecurity\AsyncLeads\Contracts\GeneratorContract;
 use CrySecurity\AsyncLeads\LeadGenerator;
 use CrySecurity\AsyncLeads\SimpleFileLogger;
+use DateTime;
+use Exception;
+use Generator;
 use LeadGenerator\Lead;
 use PHPUnit\Framework\TestCase;
 use function Amp\delay;
@@ -51,7 +56,7 @@ class AsyncGeneratorTest extends TestCase
         $lines = file(self::LOG_FILENAME . '.log');
 
         if (false === $lines) {
-            throw new \Exception("File was wrong");
+            throw new Exception("File was wrong");
         }
 
         $this->assertSame($countLeads, count($lines));
